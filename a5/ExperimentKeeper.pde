@@ -1,11 +1,12 @@
 public class ExperimentKeeper{
 
-  private static final String PARTICIPANT_ID     = "p1"; //ToDo: assign a unique id for each participant
-  private static final int NUMBER_OF_TRIALS      = 5;    //ToDo: deside # trials per participant
-  private static final int NUMBER_OF_DATA_POINTS = 10;   //ToDo: deside # data points per trial
+  private static final String PARTICIPANT_ID     = "p1"; 
+  private static final int NUMBER_OF_TRIALS      = 5;    
+  private static final int NUMBER_OF_DATA_POINTS = 10;   
 
   private static final int STATE_PROLOGUE = 0;
   private static final int STATE_TRIAL    = 1;
+  private static final int STATE_RECALL   = 3;
   private static final int STATE_EPILOGUE = 2;
 
   private Canvas canvas;
@@ -38,22 +39,27 @@ public class ExperimentKeeper{
     this.state = STATE_PROLOGUE;
   }
 
-  public Data[] generateDatasetBy(int numberOfTrials, int numberOfDataPointPerTrial){
+  private Data[] generateDatasetBy(int numberOfTrials, int numberOfDataPointPerTrial){
     Data[] dataset = new Data[numberOfTrials];
-
-    //ToDo: decide how to generate the dataset you will be using (See also Data.pde)
-    //      Note that the "dataset" holds all data that will be used in one experiment
-
+    
+    for(int i = 0; i < numberOfTrials; i++) {
+      dataset[i] = new Data(numberOfDataPointPerTrial);
+    }
+    
     return dataset;
   }
 
-  public Chart[] generateChartsFor(Data[] dataset, int chartX, int chartY, int chartWidth, int chartHeight){
+  private Chart[] generateChartsFor(Data[] dataset, int chartX, int chartY, int chartWidth, int chartHeight){
     Chart[] charts = new Chart[dataset.length];
-
-    //ToDo: decide how to generate your visualization for each data (See also Chart.pde and SampleChart.pde)
-    //      Note that each data holds all datapoints that will be projected in one chart
-    for(int i = 0; i < dataset.length; i++)
-      charts[i] = new SampleChart(new Data(0), chartX, chartY, chartWidth, chartHeight);
+    
+    for(int i = 0; i < dataset.length; i++) {
+      charts[i] = new RadarChart(new Data(NUMBER_OF_DATA_POINTS), chartX, chartY, chartWidth, chartHeight, new String[]{"a", "b", "c", "d", "e", "f"});
+      //if (int(random(2)) == 1) {
+      //  charts[i] = new BarChart(new Data(NUMBER_OF_DATA_POINTS), chartX, chartY, chartWidth, chartHeight);
+      //} else {
+      //  charts[i] = new PieChart(new Data(NUMBER_OF_DATA_POINTS), chartX, chartY, chartWidth, chartHeight);
+      //}
+    }
 
     return charts;
   }
@@ -78,6 +84,22 @@ public class ExperimentKeeper{
     table.addColumn("Error");
     return table;
   }
+  
+  //private float getTruePercentage() {
+  //  //ArrayList<Data.DataPoint> markedPoints = this.charts[currentTrialIndex].data.getMarkedPoints();
+  //  float minValue = min(markedPoints.get(0).getValue(), markedPoints.get(1).getValue());
+  //  float maxValue = max(markedPoints.get(0).getValue(), markedPoints.get(1).getValue());
+  //  return minValue / maxValue * 100;
+  //}
+  
+  private float log(float x, float base)
+  {
+      return (float)(Math.log(x) / Math.log(base));
+  }
+  
+  private float getError(float truePercentage, float reportedPercentage){
+    return log(abs(truePercentage - reportedPercentage) + .125, 2);
+  }
 
   public void onMouseClickedAt(int x, int y){
     //println("X:" + x + ", Y:" + y);
@@ -98,9 +120,12 @@ public class ExperimentKeeper{
 
             Data data = this.chart.getData();
 
+            //float truePercentage = getTruePercentage();
+            //float reportedPercentage = Float.valueOf(this.answer);
+            //float error = getError(truePercentage, reportedPercentage);
             float truePercentage = 0.0;     //ToDo: decide how to compute the right answer
             float reportedPercentage = 0.0; //ToDo: Note that "this.answer" contains what the participant inputed
-            float error = 0.0;              //ToDo: decide how to compute the log error from Cleveland and McGill (see the handout for details)
+            float error = 0.0;              //ToDo: decide how to compute the log error from Cleveland and McGill (see the handout for details
 
             TableRow row = this.result.addRow();
             row.setString("PartipantID", this.participantID);

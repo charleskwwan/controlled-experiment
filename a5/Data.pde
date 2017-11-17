@@ -6,8 +6,17 @@ public class Data{
   public Data(int size){
     this.size = size;
     this.dataPoints = new DataPoint[size];
-
-    //ToDo: how to generate data points and mark two of the data points
+    
+    // Choose two indices to mark
+    int firstMarked = int(random(0, size));
+    int secondMarked = int(random(0, size));
+    while (firstMarked == secondMarked) {
+      secondMarked = int(random(0, size));
+    }
+    
+    for (int i = 0; i < size; i++) {
+        this.dataPoints[i] = new DataPoint(random(0, 100));
+    }
   }
 
   //ToDo: feel free to add varialves and methods for your convenience
@@ -18,16 +27,10 @@ public class Data{
   }
 
   private class DataPoint{
-    private float value;;
-    private boolean isMarked;
-
-    public DataPoint(float value, boolean isMarked){
+    private float value;
+   
+    public DataPoint(float value){
       this.value = value;
-      this.isMarked = isMarked;
-    }
-
-    public boolean isMarked(){
-      return this.isMarked;
     }
 
     public float getValue(){
