@@ -86,7 +86,7 @@ public class Canvas extends Viewport{
     
     for (int i = 0; i < answers.length; i++) {
       TextField field = this.answerTextFields[i];
-      String ptLabel = valueHead + " " + String.valueOf(i) + ": ";
+      String ptLabel = valueHead + " " + getCharForNumber(i+1) + ": ";
       fill(0);
       textSize(16);
       textAlign(LEFT, TOP);

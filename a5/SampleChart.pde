@@ -16,5 +16,13 @@ public class SampleChart extends Chart{
     textAlign(CENTER, CENTER);
     text(this.name + "(" + this.data.size() + ")", this.viewCenterX, this.viewCenterY);
   }
+  
+  protected color getPointColor() {
+    return color(0);
+  }
+  
+  protected float scaleValue(float trueValue) {
+    return trueValue;
+  }
 
 }

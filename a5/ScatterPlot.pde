@@ -2,6 +2,7 @@ public class ScatterPlot extends Chart {
   private final int NUM_GAPS = 5;
   private final int TEXT_SIZE = 10;
   private final float PT_RADIUS = 4;
+  private final int MAX_VALUE = 5;
   
   private String title;
   
@@ -36,7 +37,7 @@ public class ScatterPlot extends Chart {
     return getHeight() - titleH - 2 * restH - 20;
   }
   
-  private color getPointColor() {
+  protected color getPointColor() {
     color themed = color(50, 205, 50);
     switch (COLOR_MODE) {
       case THEMED:
@@ -48,6 +49,10 @@ public class ScatterPlot extends Chart {
     }
   }
   
+  protected float scaleValue(float trueValue) {
+    return trueValue * MAX_VALUE;
+  }
+  
   public void draw() {
     float x = getX(), y = getY(), w = getWidth(), h = getHeight();
     float chartX = getChartX(), chartY = getChartY();
@@ -55,11 +60,12 @@ public class ScatterPlot extends Chart {
     textAlign(CENTER, CENTER);
     
     // bg
-    noStroke();
-    fill(255);
-    rect(x, y, w, h);
+    //noStroke();
+    //fill(255);
+    //rect(x, y, w, h);
     
     // title
+    strokeWeight(1);
     textSize(TEXT_SIZE * 2);
     fill(0);
     text(this.title, x + w/2, y + (textAscent() + textDescent())/2);
@@ -96,7 +102,7 @@ public class ScatterPlot extends Chart {
       
       // point label
       fill(0);
-      text(i - 1, tickX + PT_RADIUS + 5, ptY - PT_RADIUS - 5);
+      text(getCharForNumber(i), tickX + PT_RADIUS + 5, ptY - PT_RADIUS - 5);
     }
     
     // y ticks

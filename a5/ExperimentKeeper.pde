@@ -9,8 +9,8 @@ public class ExperimentKeeper{
   private static final int STATE_RECALL   = 2;
   private static final int STATE_EPILOGUE = 3;
   
-  private static final int TIME_PER_TRIAL = 10000; // 10 seconds, 10000 millis
-  //private static final int TIME_PER_TRIAL = 1000; // 10 seconds, 10000 millis
+  //private static final int TIME_PER_TRIAL = 10000; // 10 seconds, 10000 millis
+  private static final int TIME_PER_TRIAL = 1000; // 10 seconds, 10000 millis
 
   private Canvas canvas;
   private String participantID;
@@ -58,19 +58,32 @@ public class ExperimentKeeper{
       dataset[i] = new Data(numberOfDataPointsPerTrial);
     }
     // should be 1
-    dataset[0] = new Data(numberOfDataPointsPerTrial, Order.INCREASING);
+    dataset[0] = new Data(numberOfDataPointsPerTrial, Order.RANDOM);
+    dataset[1] = new Data(numberOfDataPointsPerTrial, Order.INCREASING);
+    dataset[2] = new Data(numberOfDataPointsPerTrial, Order.INCREASING);
     return dataset;
   }
 
   public Chart[] generateChartsFor(Data[] dataset, int chartX, int chartY, int chartWidth, int chartHeight){
     Chart[] charts = new Chart[dataset.length];
    
-    for(int i = 0; i < dataset.length; i++)
-      charts[i] = new SampleChart(dataset[i], chartX, chartY, chartWidth, chartHeight);
-      
-    // should be 1
-    charts[0] = new ScatterPlot(dataset[0], chartX, chartY, chartWidth, chartHeight);
+    for(int i = 0; i < dataset.length; i++) {
+      switch (i) {
+        case 0:
+          charts[i] = new RadarChart(dataset[i], chartX, chartY, chartWidth, chartHeight);
+          break;
+        case 1:
+          charts[i] = new BarChart(dataset[i], chartX, chartY, chartWidth, chartHeight);
+          break;
+        case 2: 
+          charts[i] = new ScatterPlot(dataset[i], chartX, chartY, chartWidth, chartHeight);
+          break;
+        default:
+          charts[i] = new SampleChart(dataset[i], chartX, chartY, chartWidth, chartHeight);
 
+      }
+    }
+    shuffle(charts);
     return charts;
   }
 
@@ -139,7 +152,7 @@ public class ExperimentKeeper{
     String colorStr = colorModeString();
     
     for (int i = 0; i < this.answers.length; i++) {
-      float trueValue = data.get(i).getValue();
+      float trueValue = this.chart.scaleValue(data.get(i).getValue());
       float recalledValue = Float.valueOf(this.answers[i]);
       float error = log(abs(recalledValue - trueValue) + 1f / 8f) / log(2);
       
@@ -233,6 +246,18 @@ public class ExperimentKeeper{
         recordTrial();          
         toNextTrial();
       }
+    }
+  }
+  
+  private void shuffle(Object[] array) {
+    int index;
+    for (int i = array.length - 1; i > 0; i--) {
+        index = int(random(i+1));
+        if (index != i) {
+            Object temp = array[i];
+            array[i] = array[index];
+            array[index] = temp;
+        }
     }
   }
 

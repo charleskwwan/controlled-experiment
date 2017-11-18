@@ -20,5 +20,8 @@ public abstract class Chart extends Viewport{
   public Data getData(){
     return this.data;
   }
-
+  
+  protected abstract color getPointColor();
+  
+  protected abstract float scaleValue(float value);
 }
