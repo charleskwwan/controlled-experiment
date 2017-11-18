@@ -46,7 +46,7 @@ public class Canvas extends Viewport{
     textAlign(CENTER, CENTER);
     text("In this experiment,\n" +
          "you will be shown a series of charts and\n" +
-         "be given 10 seconds to remember the data.\n" +
+         "be given " + int(ExperimentKeeper.TIME_PER_TRIAL / 1000) + " seconds to remember the data.\n" +
          "You will then be asked to recall the data on\n" +
          "the subsequent screen.\n\n" +
          "We won't record any other information from you except your answers.\n" +
