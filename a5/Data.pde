@@ -1,4 +1,4 @@
-public class Data{
+public class Data {
 
   private int size;
   private DataPoint[] dataPoints;
@@ -17,8 +17,12 @@ public class Data{
     return this.size;
   }
 
+  public DataPoint get(int i) {
+    return this.dataPoints[i];
+  }
+
   private class DataPoint{
-    private float value;;
+    private float value;
     private boolean isMarked;
 
     public DataPoint(float value, boolean isMarked){
