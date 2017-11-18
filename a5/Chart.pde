@@ -1,12 +1,14 @@
 public abstract class Chart extends Viewport{
 
-  protected String name;
+  protected String name, xhead, yhead;
   protected Data data;
 
   public Chart(Data data, int chartX, int chartY, int chartWidth, int chartHeight){
     super(chartX, chartY, chartWidth, chartHeight);
     this.data = data;
     this.name = "";
+    this.xhead = "";
+    this.yhead = "";
   }
 
   public abstract void draw();

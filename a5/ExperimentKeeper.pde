@@ -57,6 +57,8 @@ public class ExperimentKeeper{
     for (int i = 0; i < numberOfTrials; i++) {
       dataset[i] = new Data(numberOfDataPointsPerTrial);
     }
+    // should be 1
+    dataset[0] = new Data(numberOfDataPointsPerTrial, Order.INCREASING);
     return dataset;
   }
 
@@ -65,6 +67,9 @@ public class ExperimentKeeper{
    
     for(int i = 0; i < dataset.length; i++)
       charts[i] = new SampleChart(dataset[i], chartX, chartY, chartWidth, chartHeight);
+      
+    // should be 1
+    charts[0] = new ScatterPlot(dataset[0], chartX, chartY, chartWidth, chartHeight);
 
     return charts;
   }
@@ -86,6 +91,7 @@ public class ExperimentKeeper{
     } else if (this.state == STATE_RECALL) {
       this.canvas.drawRecallWith(
         this.answers,
+        this.chart.yhead,
         this.currentTrialIndex + 1,
         this.totalTrials
       );
@@ -98,6 +104,7 @@ public class ExperimentKeeper{
     table.addColumn("PartipantID");
     table.addColumn("TrialIndex");
     table.addColumn("ChartName");
+    table.addColumn("Color");
     table.addColumn("DataPointIndex");
     table.addColumn("TrueValue");
     table.addColumn("RecalledValue");
@@ -116,8 +123,20 @@ public class ExperimentKeeper{
     }
   }
   
+  private String colorModeString() {
+    switch (COLOR_MODE) {
+      case THEMED:
+        return "themed";
+      case OPPOSITE:
+        return "opposite";
+      default:
+        return "none";
+    }
+  }
+  
   private void recordTrial() {
     Data data = this.chart.getData();
+    String colorStr = colorModeString();
     
     for (int i = 0; i < this.answers.length; i++) {
       float trueValue = data.get(i).getValue();
@@ -128,6 +147,7 @@ public class ExperimentKeeper{
       row.setString("PartipantID", this.participantID);
       row.setInt("TrialIndex", this.currentTrialIndex);
       row.setString("ChartName", this.chart.getName());
+      row.setString("Color", colorStr);
       row.setInt("DataPointIndex", i);
       row.setFloat("TrueValue", trueValue);
       row.setFloat("RecalledValue", recalledValue);

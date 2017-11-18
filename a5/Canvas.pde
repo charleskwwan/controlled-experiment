@@ -20,7 +20,7 @@ public class Canvas extends Viewport{
     
     //this.answerTextField = new TextField(this.viewCenterX - 140, this.viewCenterY + 200, textFieldWidth, textFieldHeight);
     this.answerTextFields = new TextField[numberOfDataPoints];
-    int y = this.getY() + this.getHeight() / 6;
+    int y = this.getY() + this.getHeight() / 3;
     for (int i = 0; i < numberOfDataPoints; i++) {
       this.answerTextFields[i] = new TextField(
         this.viewCenterX - 50,
@@ -73,15 +73,20 @@ public class Canvas extends Viewport{
          this.viewCenterX, y + 75);
   }
   
-  public void drawRecallWith(String[] answers, int trialNumber, int totalTrials) {
+  public void drawRecallWith(String[] answers, String valueHead, int trialNumber, int totalTrials) {
     fill(0);
     textSize(20);
     textAlign(RIGHT, TOP);
     text("(" + trialNumber + "/" + totalTrials + ")", this.viewX + this.viewWidth, this.viewY);
     
+    textAlign(CENTER, CENTER);
+    text("Now, please type in following values for\n" +
+         "each of the points you just saw!",
+         getCenterX(), getY() + getHeight() / 7);
+    
     for (int i = 0; i < answers.length; i++) {
       TextField field = this.answerTextFields[i];
-      String ptLabel = "Data Point " + String.valueOf(i) + ": ";
+      String ptLabel = valueHead + " " + String.valueOf(i) + ": ";
       fill(0);
       textSize(16);
       textAlign(LEFT, TOP);
