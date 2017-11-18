@@ -18,8 +18,22 @@ public class Data{
         this.dataPoints[i] = new DataPoint(random(0, 100));
     }
   }
-
-  //ToDo: feel free to add varialves and methods for your convenience
+  
+  public float getMax() {
+    float max = 0;
+    for (int i = 0; i < this.size; i++) {
+       max = max(dataPoints[i].value, max);
+    }
+    return max;
+  }
+ 
+  public float getSum() {
+    float sum = 0;
+    for (int i = 0; i < this.size; i++) {
+       sum += dataPoints[i].value;
+    }
+    return sum;
+  }
 
 
   public int size(){

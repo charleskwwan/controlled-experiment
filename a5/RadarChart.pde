@@ -9,7 +9,7 @@ public class RadarChart extends Chart {
 
   public RadarChart(Data data, int chartX, int chartY, int chartWidth, int chartHeight, String[] columns){
     super(data, chartX, chartY, chartWidth, chartHeight);
-    this.name = "bar";
+    this.name = "radar";
     this.columns = columns;
     this.centerX = chartX + chartWidth / 2;
     this.centerY = chartY + chartHeight / 2;
@@ -74,12 +74,7 @@ public class RadarChart extends Chart {
     }
     endShape(CLOSE);
   }
-
-  //private PShape makeColShape() {
-  //  HashMap<String, Float> colVals = new HashMap<String, Float>();
-
-  //}
-
+  
   private float getRadius() {
     return min(getWidth(), getHeight()) / 2 - 2 * (textAscent() + textDescent() + 5);
   }

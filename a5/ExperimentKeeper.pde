@@ -52,12 +52,20 @@ public class ExperimentKeeper{
   private Chart[] generateChartsFor(Data[] dataset, int chartX, int chartY, int chartWidth, int chartHeight){
     Chart[] charts = new Chart[dataset.length];
     
+
     for(int i = 0; i < dataset.length; i++) {
-      charts[i] = new RadarChart(new Data(NUMBER_OF_DATA_POINTS), chartX, chartY, chartWidth, chartHeight, new String[]{"a", "b", "c", "d", "e", "f"});
-      //if (int(random(2)) == 1) {
-      //  charts[i] = new BarChart(new Data(NUMBER_OF_DATA_POINTS), chartX, chartY, chartWidth, chartHeight);
-      //} else {
-      //  charts[i] = new PieChart(new Data(NUMBER_OF_DATA_POINTS), chartX, chartY, chartWidth, chartHeight);
+      charts[i] = new BarChart(new Data(NUMBER_OF_DATA_POINTS), chartX, chartY, chartWidth, chartHeight);
+      //int random = int(random(2));
+      //switch (random) {
+      //  case 1:
+      //    charts[i] = new BarChart(new Data(NUMBER_OF_DATA_POINTS), chartX, chartY, chartWidth, chartHeight);
+      //    break;
+      //  case 2:
+      //    charts[i] = new RadarChart(new Data(NUMBER_OF_DATA_POINTS), chartX, chartY, chartWidth, chartHeight, new String[]{"a", "b", "c", "d", "e", "f"});
+      //    break;
+      //  default:
+      //    //charts[i] = new PieChart(new Data(NUMBER_OF_DATA_POINTS), chartX, chartY, chartWidth, chartHeight);
+        
       //}
     }
 
