@@ -1,6 +1,11 @@
 final int DEFAULT_CANVAS_WIDTH  = 900;
 final int DEFAULT_CANVAS_HEIGHT = 700;
 
+public enum ColorMode {
+  THEMED, OPPOSITE, NONE
+}
+final ColorMode COLOR_MODE = ColorMode.OPPOSITE; // themed, opposite, none
+
 ExperimentKeeper experimentKeeper;
 
 void setup(){
@@ -32,4 +37,8 @@ void mouseClicked(){
 
 void keyTyped(){
   experimentKeeper.onKeyTyped(key);
+}
+
+String getCharForNumber(int i) {
+    return i > 0 && i < 27 ? String.valueOf((char)(i + 64)) : null;
 }
