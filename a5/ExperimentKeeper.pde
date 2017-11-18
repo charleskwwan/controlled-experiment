@@ -52,22 +52,19 @@ public class ExperimentKeeper{
     return String.format("%d-%d-%d.%d-%d-%d", year(), month(), day(), hour(), minute(), second());
   }
 
-  public Data[] generateDatasetBy(int numberOfTrials, int numberOfDataPointPerTrial){
+  public Data[] generateDatasetBy(int numberOfTrials, int numberOfDataPointsPerTrial){
     Data[] dataset = new Data[numberOfTrials];
-
-    //ToDo: decide how to generate the dataset you will be using (See also Data.pde)
-    //      Note that the "dataset" holds all data that will be used in one experiment
-
+    for (int i = 0; i < numberOfTrials; i++) {
+      dataset[i] = new Data(numberOfDataPointsPerTrial);
+    }
     return dataset;
   }
 
   public Chart[] generateChartsFor(Data[] dataset, int chartX, int chartY, int chartWidth, int chartHeight){
     Chart[] charts = new Chart[dataset.length];
-
-    //ToDo: decide how to generate your visualization for each data (See also Chart.pde and SampleChart.pde)
-    //      Note that each data holds all datapoints that will be projected in one chart
+   
     for(int i = 0; i < dataset.length; i++)
-      charts[i] = new SampleChart(new Data(0), chartX, chartY, chartWidth, chartHeight);
+      charts[i] = new SampleChart(dataset[i], chartX, chartY, chartWidth, chartHeight);
 
     return charts;
   }
@@ -108,6 +105,11 @@ public class ExperimentKeeper{
     return table;
   }
   
+  private void enableAnswer(int i) {
+    this.canvas.enableTextField(i);
+    this.enabledAnswer = i;
+  }
+  
   private void clearAnswers() {
     for (int i = 0; i < this.answers.length; i++) {
       this.answers[i] = "";
@@ -121,10 +123,7 @@ public class ExperimentKeeper{
       float trueValue = data.get(i).getValue();
       float recalledValue = Float.valueOf(this.answers[i]);
       float error = log(abs(recalledValue - trueValue) + 1f / 8f) / log(2);
-      //float truePercentage = 0.0;     //ToDo: decide how to compute the right answer
-      //float reportedPercentage = 0.0; //ToDo: Note that "this.answer" contains what the participant inputed
-      //float error = 0.0;              //ToDo: decide how to compute the log error from Cleveland and McGill (see the handout for details)
-  
+      
       TableRow row = this.result.addRow();
       row.setString("PartipantID", this.participantID);
       row.setInt("TrialIndex", this.currentTrialIndex);
@@ -141,6 +140,7 @@ public class ExperimentKeeper{
     if (this.currentTrialIndex < this.totalTrials) {
       this.chart = this.charts[this.currentTrialIndex];
       clearAnswers();
+      enableAnswer(0);
       this.state = STATE_TRIAL;
       this.startTime = -1;
     } else {
@@ -167,10 +167,7 @@ public class ExperimentKeeper{
           
         case STATE_RECALL:
           int textFieldIndex = this.canvas.hasTextFieldAt(x, y);
-          if (textFieldIndex >= 0) {
-            this.canvas.enableTextField(textFieldIndex);
-            this.enabledAnswer = textFieldIndex;
-          }
+          if (textFieldIndex >= 0) enableAnswer(textFieldIndex);
           
           if (this.canvas.hasActiveNextButtonAt(x, y)) {
             recordTrial();          
@@ -203,8 +200,7 @@ public class ExperimentKeeper{
         if(answer.length() > 0)
           this.answers[this.enabledAnswer] = answer.substring(0, answer.length() - 1);
       } else if (keyTyped == 9) {
-        this.enabledAnswer = (this.enabledAnswer + 1) % this.answers.length;
-        this.canvas.enableTextField(this.enabledAnswer);
+        enableAnswer((this.enabledAnswer + 1) % this.answers.length);
       }
       for (String ans : this.answers) {
         if (Float.isNaN(float(ans)) || ans.length() == 0) {

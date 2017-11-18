@@ -6,12 +6,12 @@ public class Data {
   public Data(int size){
     this.size = size;
     this.dataPoints = new DataPoint[size];
-
-    //ToDo: how to generate data points and mark two of the data points
+    
+    // generate scalable pts from 20% (to prevent going too low) to 100%
+    for (int i = 0; i < size; i++) {
+      this.dataPoints[i] = new DataPoint(random(0.2, 1), false);
+    }
   }
-
-  //ToDo: feel free to add varialves and methods for your convenience
-
 
   public int size(){
     return this.size;
