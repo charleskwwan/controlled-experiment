@@ -23,5 +23,5 @@ public abstract class Chart extends Viewport{
   
   protected abstract color getPointColor();
   
-  protected abstract float scaleValue(float value);
+  protected abstract int getMaxValue();
 }

@@ -9,8 +9,8 @@ public class ExperimentKeeper{
   private static final int STATE_RECALL   = 2;
   private static final int STATE_EPILOGUE = 3;
   
-  //private static final int TIME_PER_TRIAL = 10000; // 10 seconds, 10000 millis
-  private static final int TIME_PER_TRIAL = 1000; // 10 seconds, 10000 millis
+  private static final int TIME_PER_TRIAL = 10000; // 10 seconds, 10000 millis
+  //private static final int TIME_PER_TRIAL = 1000; // 10 seconds, 10000 millis
 
   private Canvas canvas;
   private String participantID;
@@ -152,8 +152,8 @@ public class ExperimentKeeper{
     String colorStr = colorModeString();
     
     for (int i = 0; i < this.answers.length; i++) {
-      float trueValue = this.chart.scaleValue(data.get(i).getValue());
-      float recalledValue = Float.valueOf(this.answers[i]);
+      float trueValue = data.get(i).getValue() * 100;
+      float recalledValue = Float.valueOf(this.answers[i]) / this.chart.getMaxValue() * 100 ;
       float error = log(abs(recalledValue - trueValue) + 1f / 8f) / log(2);
       
       TableRow row = this.result.addRow();

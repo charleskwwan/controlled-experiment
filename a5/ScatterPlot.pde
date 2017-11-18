@@ -49,10 +49,6 @@ public class ScatterPlot extends Chart {
     }
   }
   
-  protected float scaleValue(float trueValue) {
-    return trueValue * MAX_VALUE;
-  }
-  
   public void draw() {
     float x = getX(), y = getY(), w = getWidth(), h = getHeight();
     float chartX = getChartX(), chartY = getChartY();
@@ -121,5 +117,9 @@ public class ScatterPlot extends Chart {
     stroke(0);
     line(chartX, chartY + chartH, chartX + chartW, chartY + chartH); // x axis
     line(chartX, chartY, chartX, chartY + chartH); // y axis
+  }
+  
+  protected int getMaxValue() {
+    return MAX_VALUE; 
   }
 }

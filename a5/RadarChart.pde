@@ -1,6 +1,6 @@
 public class RadarChart extends Chart {
   private final int numRanges = 5;
-  private final int maxRange = 20;
+  private final int MAX_VALUE = 20;
   private final int TEXT_SIZE = 10;
   private final int PT_RADIUS = 3;
 
@@ -72,7 +72,7 @@ public class RadarChart extends Chart {
         line(p1.x, p1.y, p2.x, p2.y);
         
         if (i == this.columns.length - 2) {             // range labels
-          String label = String.valueOf(int(float(maxRange) / numRanges * j));
+          String label = String.valueOf(int(float(MAX_VALUE) / numRanges * j));
           text(label, p1.x + 7, p1.y);  
         }
       }
@@ -124,8 +124,8 @@ public class RadarChart extends Chart {
     }
   }
   
-  protected float scaleValue(float trueValue) {
-    return trueValue * maxRange;
+  protected int getMaxValue() {
+    return MAX_VALUE; 
   }
   
   private float getChartX() {

@@ -119,8 +119,8 @@ public class BarChart extends Chart {
     }
   }
   
-  protected float scaleValue(float trueValue) {
-    return trueValue * MAX_VALUE;
+  protected int getMaxValue() {
+    return MAX_VALUE; 
   }
   
   private float getChartX() {

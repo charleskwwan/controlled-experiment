@@ -21,8 +21,8 @@ public class SampleChart extends Chart{
     return color(0);
   }
   
-  protected float scaleValue(float trueValue) {
-    return trueValue;
+  protected int getMaxValue() {
+    return 0; 
   }
 
 }
