@@ -120,7 +120,7 @@ public class RadarChart extends Chart {
       case OPPOSITE:
         return color(325-red(themed), 255-green(themed), 255-blue(themed));
       default:
-        return 255;
+        return 0;
     }
   }
   
