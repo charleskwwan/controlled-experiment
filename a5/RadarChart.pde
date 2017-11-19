@@ -84,7 +84,7 @@ public class RadarChart extends Chart {
     offset = -TWO_PI / (2 * this.columns.length) - (3*PI/2);
     PVector[] vertices = new PVector[this.columns.length];
     beginShape();
-    fill(dataColor, 75);
+    fill(dataColor, 75); 
     stroke(dataColor);
     strokeWeight(2);
     for (int i = 0; i < this.columns.length; i++) {
@@ -120,7 +120,7 @@ public class RadarChart extends Chart {
       case OPPOSITE:
         return color(325-red(themed), 255-green(themed), 255-blue(themed));
       default:
-        return 255;
+        return 0;
     }
   }
   

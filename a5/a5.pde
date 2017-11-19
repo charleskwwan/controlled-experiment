@@ -4,7 +4,7 @@ final int DEFAULT_CANVAS_HEIGHT = 700;
 public enum ColorMode {
   THEMED, OPPOSITE, NONE
 }
-final ColorMode COLOR_MODE = ColorMode.OPPOSITE; // themed, opposite, none
+final ColorMode COLOR_MODE = ColorMode.NONE; // themed, opposite, none
 
 ExperimentKeeper experimentKeeper;
 

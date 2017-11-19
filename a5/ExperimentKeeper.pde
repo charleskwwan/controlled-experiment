@@ -10,7 +10,7 @@ public class ExperimentKeeper{
   private static final int STATE_EPILOGUE = 3;
   
   //private static final int TIME_PER_TRIAL = 10000; // 10 seconds, 10000 millis
-  private static final int TIME_PER_TRIAL = 1000; // 10 seconds, 10000 millis
+  private static final int TIME_PER_TRIAL = 30000; // 10 seconds, 10000 millis
 
   private Canvas canvas;
   private String participantID;
