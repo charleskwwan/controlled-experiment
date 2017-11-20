@@ -1,0 +1,16 @@
+PartipantID,TrialIndex,ChartName,Color,DataPointIndex,TrueValue,RecalledValue,Error
+p2017-11-19.20-31-44,0,ScatterPlot,opposite,0,2.7119782,2.8,-2.2309272
+p2017-11-19.20-31-44,0,ScatterPlot,opposite,1,3.6176312,3.7,-2.269729
+p2017-11-19.20-31-44,0,ScatterPlot,opposite,2,4.0717435,4.0,-2.3456123
+p2017-11-19.20-31-44,0,ScatterPlot,opposite,3,4.5938787,4.5,-2.1917963
+p2017-11-19.20-31-44,0,ScatterPlot,opposite,4,4.659514,4.55,-2.0922554
+p2017-11-19.20-31-44,1,BarChart,opposite,0,43.26954,43.0,-1.3417606
+p2017-11-19.20-31-44,1,BarChart,opposite,1,86.38819,90.0,1.9018067
+p2017-11-19.20-31-44,1,BarChart,opposite,2,89.52454,91.0,0.6784832
+p2017-11-19.20-31-44,1,BarChart,opposite,3,91.08272,92.0,0.05974581
+p2017-11-19.20-31-44,1,BarChart,opposite,4,92.73571,93.0,-1.3610834
+p2017-11-19.20-31-44,2,RadarChart,opposite,0,16.016188,16.0,-2.824314
+p2017-11-19.20-31-44,2,RadarChart,opposite,1,11.480855,4.0,2.9271102
+p2017-11-19.20-31-44,2,RadarChart,opposite,2,5.1287603,9.0,1.998643
+p2017-11-19.20-31-44,2,RadarChart,opposite,3,9.503309,8.0,0.70337474
+p2017-11-19.20-31-44,2,RadarChart,opposite,4,11.359064,12.0,-0.3847044
